@@ -1,0 +1,20 @@
+subscription CustomerUpdated {
+  event {
+    __typename
+    ... on CustomerUpdated {
+      __typename
+      user {
+        id
+        firstName
+        lastName
+        email
+        privateMetafields
+      }
+    }
+    recipient {
+      webhooks {
+        id
+      }
+    }
+  }
+}

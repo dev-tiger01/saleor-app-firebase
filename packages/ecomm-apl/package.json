@@ -1,0 +1,27 @@
+{
+  "name": "@ecomm/APL",
+  "version": "0.0.1",
+  "scripts": {
+    "lint:fix": "eslint --fix ."
+  },
+  "dependencies": {
+    "aws-amplify": "^5.3.11",
+    "eslint": "8.46.0"
+  },
+  "devDependencies": {
+    "@saleor/app-sdk": "0.43.1",
+    "@saleor/apps-shared": "workspace:*",
+    "@types/react": "18.2.5",
+    "@types/react-dom": "18.2.5",
+    "eslint-config-saleor": "workspace:*",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "5.1.6"
+  },
+  "main": "index.ts",
+  "peerDependencies": {
+    "@saleor/app-sdk": "0.43.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
+}
