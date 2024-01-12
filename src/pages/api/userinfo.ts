@@ -70,7 +70,8 @@ const handler: NextApiHandler = async function (req: NextApiRequest, res: NextAp
     const decodedToken = await FirebaseAdmin.auth().verifyIdToken(idToken);
     logger.info('Firebase token valid');
     // loggerAws.debug('Firebase token valid');
-    tokenData = handleUserInfo(decodedToken as DecodedToken);
+    //tokenData = handleUserInfo(decodedToken as DecodedToken);
+    tokenData = decodedToken;
     loggerAws.debug(tokenData);
     logger.debug(tokenData);
     const { email, uid, given_name, family_name, phone_number } = tokenData;
