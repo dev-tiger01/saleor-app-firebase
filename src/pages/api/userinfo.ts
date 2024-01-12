@@ -21,27 +21,27 @@ interface DecodedToken {
 }
 
 function handleUserInfo(decodedToken: DecodedToken): DecodedToken {
-  if (decodedToken.given_name && decodedToken.family_name) {
-    // "given_name" and "family_name" properties already exist, no need to do anything.
-    return decodedToken;
-  }
-  logger.info('Normalizing Firebase token')
+  // if (decodedToken.given_name && decodedToken.family_name) {
+  //   // "given_name" and "family_name" properties already exist, no need to do anything.
+  //   return decodedToken;
+  // }
+  // logger.info('Normalizing Firebase token')
   let given_name = '' 
   let family_name = '' 
 
-  if (decodedToken.name) {
-    try {
-      const displayNameArray: string[] = JSON.parse(decodedToken.name);
-      if (Array.isArray(displayNameArray) && displayNameArray.length >= 2) {
-        given_name = displayNameArray[0];
-        family_name = displayNameArray[1];
-      }
-    } catch (e) {
-      const names: string[] = decodedToken.name.split(" ");
-      given_name = names[0];
-      family_name = names.slice(1).join(" ");
-    }
-  }
+  // if (decodedToken.name) {
+  //   try {
+  //     const displayNameArray: string[] = JSON.parse(decodedToken.name);
+  //     if (Array.isArray(displayNameArray) && displayNameArray.length >= 2) {
+  //       given_name = displayNameArray[0];
+  //       family_name = displayNameArray[1];
+  //     }
+  //   } catch (e) {
+  //     const names: string[] = decodedToken.name.split(" ");
+  //     given_name = names[0];
+  //     family_name = names.slice(1).join(" ");
+  //   }
+  // }
 
   return {...decodedToken, given_name, family_name}
 }
@@ -70,8 +70,8 @@ const handler: NextApiHandler = async function (req: NextApiRequest, res: NextAp
     const decodedToken = await FirebaseAdmin.auth().verifyIdToken(idToken);
     logger.info('Firebase token valid');
     // loggerAws.debug('Firebase token valid');
-    //tokenData = handleUserInfo(decodedToken as DecodedToken);
-    tokenData = decodedToken;
+    tokenData = handleUserInfo(decodedToken as DecodedToken);
+    
     loggerAws.debug(tokenData);
     logger.debug(tokenData);
     const { email, uid, given_name, family_name, phone_number } = tokenData;
